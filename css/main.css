@@ -1,0 +1,9 @@
+body {
+    background-color: #d3d3d3;
+}
+
+.is-base64btn {
+    color: #000;
+    border-color: transparent;
+    background-color: #ffbd33;
+}
