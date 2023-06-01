@@ -1,4 +1,5 @@
 window.onload = start();
+//"global" variables
 var	output;
 var	padding = 0;
 var base64EncodingTable = {
@@ -68,6 +69,15 @@ var base64EncodingTable = {
 	63: '/',
   };  
 
+/*
+  The "start" function initializes variables and sets up 
+  event listeners for encryption functionality on the app.
+  It retrieves input from an element with the id "noEncrypted"
+  and stores it in the "inputText" variable. When the "encryptBtn"
+  element with the id "encryptBtn" is clicked, the function
+  "input_to_binary" is called to convert the input text into its
+  binary representation for encryption.
+*/
 function	start()
 {
 	var	input;
@@ -83,11 +93,34 @@ function	start()
 	});
 }
 
+/*
+The "char_to_binary" function takes a character as input 
+and converts it into its binary representation. It accomplishes
+this by utilizing the "charCodeAt" method, which retrieves the
+Unicode value of the character. The obtained Unicode value is
+then converted to a binary string using the "toString" method
+with a base of 2. The resulting binary string is returned as the
+output of the function, representing the binary representation of
+the input character.
+*/
 function    char_to_binary(char)
 {
 	return char.charCodeAt(0).toString(2);
 }
 
+/*
+The "input_to_binary" function converts a given input string into 
+its binary representation. Within the function, a variable called 
+"string" is declared and initialized as an empty string.
+The input string is then split into an array of individual
+characters using the "split('')" method. The "map" function
+is applied to each character of the input array, calling
+the "char_to_binary" function on each character to convert it
+into its binary representation. The resulting array of binary strings
+is then joined together using the "join('')" method, forming a single
+binary string representation of the input. Finally, the "split_bits"
+function is called.
+*/
 function	input_to_binary(input)
 {
 	var	string;
@@ -99,6 +132,14 @@ function	input_to_binary(input)
 	split_bits(string);
 }
 
+/*
+The "split_bits" function divides a binary string into groups of
+six bits. It iterates through the input string, extracting slices
+of six bits at a time and storing them in an array called "bits".
+If the input length is not divisible by 3, padding is determined
+based on the remaining bits. The function then likely passes the
+"bits" array for further processing, possibly involving base64 conversion.
+*/
 function split_bits(stream) {
 	var	bits = [];
 	let	i;
@@ -125,6 +166,15 @@ function split_bits(stream) {
 	convert_to_base64_chars(bits);
 }
 
+/*
+The "convert_to_base64_chars" function converts an array of binary
+strings to base64-encoded characters. It maps each binary string to
+its corresponding base64 character using a lookup table and joins them
+together to form a string. Padding is handled by appending "="
+characters based on a separate padding variable. The resulting
+base64-encoded string is assigned to an "output.value" property, likely
+updating the displayed value.
+*/
 function convert_to_base64_chars(bits) 
 {
 	var	string = "";
@@ -140,6 +190,13 @@ function convert_to_base64_chars(bits)
 	output.value = string;
 }
 
+/*
+The "preventDefault" function is an arrow function
+that takes an event object as an argument and prevents
+the default behavior of the event. It achieves this by
+calling the "preventDefault" method on the event object,
+effectively canceling any default actions associated with the event.
+*/
 function preventDefault()
 {
 	(e)=>e.preventDefault();
