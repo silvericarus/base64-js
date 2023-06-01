@@ -101,11 +101,12 @@ Unicode value of the character. The obtained Unicode value is
 then converted to a binary string using the "toString" method
 with a base of 2. The resulting binary string is returned as the
 output of the function, representing the binary representation of
-the input character.
+the input character. The "padStart" function ensures that the
+binary string is left-padded with zeros up to a length of 8 characters.
 */
 function    char_to_binary(char)
 {
-	return char.charCodeAt(0).toString(2);
+	return char.codePointAt().toString(2).padStart(8, '0');
 }
 
 /*
@@ -146,9 +147,9 @@ function split_bits(stream) {
 	let	j;
 	let	padding_res;
 
+
 	i = 0;
 	j = 0;
-
 	while (j < stream.length)
 	{
 		bits[i] = stream.slice(j, j + 6);
@@ -158,9 +159,10 @@ function split_bits(stream) {
 	if (stream.length % 3 != 0)
 	{
 		padding_res = 6 - bits[bits.length - 1].length;
+		console.log(padding_res);
 		if (padding_res == 1)
 			padding = 1;
-		else if (padding_res == 2)
+		else if (padding_res % 2 == 0)
 			padding = 2;
 	}
 	convert_to_base64_chars(bits);
