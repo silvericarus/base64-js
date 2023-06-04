@@ -7,3 +7,7 @@ body {
     border-color: transparent;
     background-color: #ffbd33;
 }
+
+svg {
+    fill: #ffbd33;
+}
