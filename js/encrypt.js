@@ -98,12 +98,16 @@ function is called.
 function	input_to_binary(input)
 {
 	var	string;
+	var	s;
 
 	string = "";
+	s = input.split('').map(char => {
+		return char_to_binary(char);
+	}).join(' ');
 	string = input.split('').map(char => {
 		return char_to_binary(char);
 	}).join('');
-	console.log(string);
+	console.log(s);
 	split_bits(string);
 }
 

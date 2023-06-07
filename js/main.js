@@ -41,12 +41,38 @@ function padding_remover(input)
 function convert_to_number(input)
 {
 	var	numbers;
-
 	numbers = input.split('').map(char => {
-		return Number(Object.keys(base64EncodingTable)
+		const binary = Number(Object.keys(base64EncodingTable)
 		.find(key => base64EncodingTable[key] === char)).toString(2);
-	}).join(' ');
-	console.log(numbers);
+		return binary;
+	}).join('');
+	split_to_8bits(numbers);
+}
+
+function split_to_8bits(input)
+{
+	var	bits = [];
+	let	i;
+	let	j;
+
+	i = 0;
+	j = 0;
+	while (j < input.length)
+	{
+		bits[i] = input.slice(j, j + 8);
+		i++;
+		j += 8;
+	}
+	convert_to_ascii(bits);
+}
+
+function convert_to_ascii(input)
+{
+	var	string = "";
+	string = input.map(elem => {
+		return String.fromCharCode(parseInt(elem, 2));
+	}).join('');
+	console.log(string);
 }
 
 /*
