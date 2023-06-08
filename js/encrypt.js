@@ -1,3 +1,4 @@
+var padding = 0;
 var base64EncodingTable = {
 	0: 'A',
 	16: 'Q',
@@ -63,7 +64,7 @@ var base64EncodingTable = {
 	31: 'f',
 	47: 'v',
 	63: '/',
-};  
+};
 
 /*
 The "char_to_binary" function takes a character as input 
@@ -107,7 +108,6 @@ function	input_to_binary(input)
 	string = input.split('').map(char => {
 		return char_to_binary(char);
 	}).join('');
-	console.log(s);
 	split_bits(string);
 }
 
@@ -123,8 +123,6 @@ function split_bits(stream) {
 	var	bits = [];
 	let	i;
 	let	j;
-	let	padding_res;
-
 
 	i = 0;
 	j = 0;
@@ -136,11 +134,11 @@ function split_bits(stream) {
 	}
 	if (stream.length % 3 != 0)
 	{
-		padding_res = 6 - bits[bits.length - 1].length;
-		if (padding_res == 1)
-			padding = 1;
-		else if (padding_res % 2 == 0)
+		var bytesWithoutPadding = stream.length - Math.floor(stream.length / 3) * 3;
+		if (bytesWithoutPadding === 1)
 			padding = 2;
+		else if (bytesWithoutPadding === 2)
+			padding = 1;
 	}
 	convert_to_base64_chars(bits);
 }
@@ -161,10 +159,10 @@ function convert_to_base64_chars(bits)
 	string = bits.map(elem => {
 		return base64EncodingTable[parseInt(elem, 2)];
 	}).join('');
-	while (padding > 0)
+	while (padding >= 0)
 	{
 		string += "=";
-		padding--;
+		padding -= 2;
 	}
 	output.value = string;
 }

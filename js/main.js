@@ -97,35 +97,21 @@ function	start()
 function convert_to_number(input)
 {
 	var	numbers;
-	var padding;
-	var paddingBits;
 
-	padding = 0;
-	paddingBits = 0;
-	input.split('')
-	.filter(char => char == "=").map(() => {
-		padding++;
-	});
-	paddingBits = padding * 6;
 	numbers = input.split('')
 	.filter(char => char !== "=").map(char => {
 		return base64DecodingTable[char].toString(2).padStart(6, '0');
 	}).join('');
-	// Calculate the number of extra zeros added
-	var extraZeros = (8 - (numbers.length % 8)) % 8;
-	// Add the extra zeros
-	numbers = numbers.padEnd(numbers.length + extraZeros, '0');
-  	numbers = numbers.slice(0, -paddingBits);
-	split_to_8bits(numbers);
+	split_to_8bits(numbers, input);
 }
 
-function split_to_8bits(input)
+function split_to_8bits(input, original)
 {
 	var bytes = [];
- 
-	for (var i = 0; i < input.length; i += 8) {
+
+	padding = original.match(/=/g)?.length || 0;
+	for (var i = 0; i < input.length - padding; i += 8) {
 		var byte = input.substr(i, 8);
-		// console.log(parseInt(byte, 2));
 		bytes.push(parseInt(byte, 2));
 	}
 	decrypt(bytes);
@@ -138,7 +124,7 @@ function decrypt(bytes)
 	decrypted =	bytes.map(byte => {
 		return String.fromCharCode(byte);
 	}).join('');
-	console.log(decrypted);
+	outputDecrypted.value = decrypted;
 }
 
 /*
