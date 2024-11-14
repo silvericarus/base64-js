@@ -1,6 +1,7 @@
 <img src="https://github.com/silvericarus/base64-js/blob/main/img/icon-512-maskable.png" width="91.5px"/>
 <p style="float:left;">
   <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0 License"></a>
+  <a href="https://app.netlify.com/sites/base64-js/deploys"><img src="https://api.netlify.com/api/v1/badges/b80a1afd-0afd-42fe-97a7-5833e3d99739/deploy-status"/></a>
   <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a>
   <img src="https://4.vercel.app/github/languageall/silvericarus/base64-js">
 </p>
